@@ -9,20 +9,19 @@ const prog = {
 
 let dir="scripts";
 let files=fileSystem.readdirSync(dir);
-let output;
 files.forEach(file => {
   switch (file.substring(file.lastIndexOf(".")+1)) {
     case "php":
-      output=handlePHP(file);
+      handlePHP(file);
       break;
     case "js":
-      output=handleJS(file);
+      handleJS(file);
       break;
     case "py":
-      output=handlePY(file);
+      handlePY(file);
       break;
     case "cpp":
-      output=handleCPP(file)
+      handleCPP(file)
       break;
     default:
       break;
@@ -40,7 +39,6 @@ function handlePHP(fileName) {
   ) {
     if (err) console.log(err);
     console.log(phpResponse);
-    return phpResponse;
   });
 }
 
@@ -49,7 +47,6 @@ function handleJS(fileName) {
   const cp = runner.spawn(prog.node, [`./scripts/${fileName}`]);
   cp.stdout.on("data", (data) =>{
     console.log(`${data}`);
-    return `${data}`;
   });
   
 }
@@ -77,7 +74,6 @@ function handleCPP(inputFile) {
             if (error) throw error;
             else{
               console.log(out);
-              return out;
             }
           }
         );
@@ -100,6 +96,5 @@ function handlePY(fileName) {
   // print output of script
   subprocess.stdout.on("data", (data) => {
     console.log(`${data}`);
-    return `${data}`;
   });
 }

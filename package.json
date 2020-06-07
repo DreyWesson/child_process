@@ -1,0 +1,23 @@
+{
+  "name": "how-tos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "argv.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DreyWesson/how-tos.git"
+  },
+  "keywords": [],
+  "author": "dreywesson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DreyWesson/how-tos/issues"
+  },
+  "homepage": "https://github.com/DreyWesson/how-tos#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

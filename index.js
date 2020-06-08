@@ -1,16 +1,17 @@
 const runner = require("child_process");
 const path = require("path");
-const fileSystem=require("fs");
+const fileSystem = require("fs");
 
 const prog = {
   list: "ls",
   node: "node",
 };
 
-let dir="scripts";
-let files=fileSystem.readdirSync(dir);
-files.forEach(file => {
-  switch (file.substring(file.lastIndexOf(".")+1)) {
+let dir = "scripts";
+let files = fileSystem.readdirSync(dir);
+files.forEach((file) => {
+  const scriptExe = file.substring(file.lastIndexOf(".") + 1);
+  switch (scriptExe) {
     case "php":
       handlePHP(file);
       break;
@@ -21,7 +22,7 @@ files.forEach(file => {
       handlePY(file);
       break;
     case "cpp":
-      handleCPP(file)
+      handleCPP(file);
       break;
     default:
       break;
@@ -32,23 +33,21 @@ files.forEach(file => {
 function handlePHP(fileName) {
   var phpScriptPath = `./scripts/${fileName}`;
   var argsString = "value1,value2,value3";
-  runner.exec("php " + phpScriptPath + " " + argsString, function (
-    err,
-    phpResponse,
-    stderr
-  ) {
-    if (err) console.log(err);
-    console.log(phpResponse);
-  });
+  runner.exec(
+    "php " + phpScriptPath + " " + argsString,
+    (err, phpResponse, stderr) => {
+      if (err) console.log(err);
+      console.log(phpResponse);
+    }
+  );
 }
 
 // run javascripts
 function handleJS(fileName) {
   const cp = runner.spawn(prog.node, [`./scripts/${fileName}`]);
-  cp.stdout.on("data", (data) =>{
+  cp.stdout.on("data", (data) => {
     console.log(`${data}`);
   });
-  
 }
 
 //run c++ script
@@ -58,7 +57,7 @@ function handleCPP(inputFile) {
     out = "-o",
     infile = `./scripts/${inputFile}`,
     outfile = "./scripts/hello.out",
-    name = "C++";
+    name = "Oduwole";
 
   const child = runner.execFile(
     compiler,
@@ -72,9 +71,7 @@ function handleCPP(inputFile) {
           [name],
           (error, out, err) => {
             if (error) throw error;
-            else{
-              console.log(out);
-            }
+            else console.log(out);
           }
         );
       }
@@ -93,8 +90,5 @@ function handlePY(fileName) {
     ]);
   }
   const subprocess = runScript();
-  // print output of script
-  subprocess.stdout.on("data", (data) => {
-    console.log(`${data}`);
-  });
+  subprocess.stdout.on("data", (data) => console.log(`${data}`));
 }

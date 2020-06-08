@@ -2,7 +2,7 @@
 
 void sayHello(std::string name)
 {
-  std::string data = "hello, "+ name +"!";
+  std::string data = "Hello world, this is "+ name +"!";
   std::cout << data << std::endl;
 }
 

@@ -8,25 +8,28 @@ const prog = {
 };
 
 let dir = "scripts";
-let files = fileSystem.readdirSync(dir);
-files.forEach((file) => {
-  const scriptExe = file.substring(file.lastIndexOf(".") + 1);
-  switch (scriptExe) {
-    case "php":
-      handlePHP(file);
-      break;
-    case "js":
-      handleJS(file);
-      break;
-    case "py":
-      handlePY(file);
-      break;
-    case "cpp":
-      handleCPP(file);
-      break;
-    default:
-      break;
-  }
+fileSystem.readdir(dir, (err, files) => {
+  if (err) throw err;
+
+  files.forEach((file) => {
+    const scriptExe = file.substring(file.lastIndexOf(".") + 1);
+    switch (scriptExe) {
+      case "php":
+        handlePHP(file);
+        break;
+      case "js":
+        handleJS(file);
+        break;
+      case "py":
+        handlePY(file);
+        break;
+      case "cpp":
+        handleCPP(file);
+        break;
+      default:
+        break;
+    }
+  });
 });
 
 // run php scripts

@@ -8,7 +8,9 @@ const prog = {
 };
 
 let dir = "scripts";
-fileSystem.readdir(dir, (err, files) => {
+fileSystem.readdir(dir, fileExe);
+
+function fileExe(err, files) {
   if (err) throw err;
 
   files.forEach((file) => {
@@ -30,7 +32,7 @@ fileSystem.readdir(dir, (err, files) => {
         break;
     }
   });
-});
+}
 
 // run php scripts
 function handlePHP(fileName) {
